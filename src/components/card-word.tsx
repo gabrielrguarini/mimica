@@ -67,12 +67,16 @@ export default function CardWord({
     return null;
   }
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex flex-col p-4 gap-8 z-10 bg-white">
-      <div className="flex flex-col justify-between p-4 gap-8 item">
+    <div className="m-auto min-w-xl h-full flex flex-col p-4 gap-8 z-10 bg-white">
+      <div className="flex flex-col justify-between p-4 gap-8">
         <h3 className="text-2xl font-bold text-gray-400 bg-gray-200 px-6 py-2 rounded-xl text-center capitalize">
           Categoria: {word.categories}
         </h3>
-        <h1 className="text-xl text-red-500 capitalize text-center font-bold">
+        <h1
+          className={`text-xl ${
+            team === Teams.RED ? "text-red-500" : "text-blue-500"
+          } capitalize text-center font-bold`}
+        >
           {team === Teams.RED ? "Vermelho" : "Azul"}
         </h1>
         <p className="text-5xl font-extrabold text-center capitalize">
