@@ -20,6 +20,7 @@ export default function CardWord({
   team,
 }: CardWordProps) {
   const [timeLeft, setTimeLeft] = useState(60);
+  const [blur, setBlur] = useState(false);
   const playSound = () => {
     const audio = new Audio("./sound.wav");
     audio.play();
@@ -79,9 +80,17 @@ export default function CardWord({
         >
           {team === Teams.RED ? "Vermelho" : "Azul"}
         </h1>
-        <p className="text-5xl font-extrabold text-center capitalize">
+        <p
+          onClick={() => {
+            setBlur((prev) => !prev);
+          }}
+          className={`text-5xl font-extrabold text-center capitalize cursor-pointer ${
+            blur ? "blur-xl" : ""
+          }`}
+        >
           {word.word}
         </p>
+        <p className="text-xs text-center">Click para esconder a palavra</p>
         <div className="flex justify-center rounded-md">
           <span className="text-8xl text-red-500 font-bold ">
             {formatTime(timeLeft)}
