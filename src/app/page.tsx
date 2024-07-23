@@ -4,8 +4,10 @@ import words from "../../public/db.json";
 import { useEffect, useState } from "react";
 import SortNumber from "@/utils/sort-number";
 import { Teams } from "@/types/teams";
+import { useWakeLock } from "@/hooks/useWakeLook";
 
 export default function Home() {
+  useWakeLock();
   const [visible, setVisible] = useState(false);
   const [indexWord, setIndexWord] = useState(0);
   const [redPoints, setRedPoints] = useState(0);
@@ -39,13 +41,13 @@ export default function Home() {
               Categoria: {words[indexWord].categories}
             </span>
           </div>
-          <div className="flex gap-2 m-auto">
-            <div className="text-xl bg-red-500 p-8 rounded-md w-1/2">
-              Time Vermelho: {redPoints}
-            </div>
-            <div className="text-xl bg-blue-500 p-8 rounded-md w-1/2">
-              Time Azul: {bluePoints}
-            </div>
+          <div className="flex gap-2 w-full m-auto font-semibold">
+            <p className="text-xl bg-red-500 p-8 rounded-md w-1/2">
+              Vermelho: {redPoints}
+            </p>
+            <p className="text-xl bg-blue-500 p-8 rounded-md w-1/2">
+              Azul: {bluePoints}
+            </p>
           </div>
           <div className="flex flex-col gap-2 m-auto bg-gray-300 w-full px-4 py-6 rounded-md">
             <h3 className="text-2xl font-bold px-4">É a vez do time:</h3>

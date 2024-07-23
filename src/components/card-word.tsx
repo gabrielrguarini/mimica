@@ -90,7 +90,14 @@ export default function CardWord({
         >
           {word.word}
         </p>
-        <p className="text-xs text-center">Click para esconder a palavra</p>
+        <p
+          onClick={() => {
+            setBlur((prev) => !prev);
+          }}
+          className="text-xs text-center"
+        >
+          Click para esconder a palavra
+        </p>
         <div className="flex justify-center rounded-md">
           <span className="text-8xl text-red-500 font-bold ">
             {formatTime(timeLeft)}
