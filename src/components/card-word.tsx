@@ -22,7 +22,7 @@ export default function CardWord({
   const [timeLeft, setTimeLeft] = useState(60);
   const [blur, setBlur] = useState(false);
   const playSound = () => {
-    const audio = new Audio("./sound.wav");
+    const audio = new Audio("./sound6times.mp3");
     audio.play();
   };
   useEffect(() => {
