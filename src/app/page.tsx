@@ -19,7 +19,6 @@ export default function Home() {
   useEffect(() => {
     newWord();
   }, []);
-  console.log(words[indexWord]);
   return (
     <main className="min-h-screen max-w-xl m-auto  flex-col items-center justify-between relative">
       {visible ? (
@@ -41,10 +40,10 @@ export default function Home() {
             </span>
           </div>
           <div className="flex gap-2 m-auto">
-            <div className="text-xl bg-red-500 p-8 rounded-md">
+            <div className="text-xl bg-red-500 p-8 rounded-md w-1/2">
               Time Vermelho: {redPoints}
             </div>
-            <div className="text-xl bg-blue-500 p-8 rounded-md">
+            <div className="text-xl bg-blue-500 p-8 rounded-md w-1/2">
               Time Azul: {bluePoints}
             </div>
           </div>
