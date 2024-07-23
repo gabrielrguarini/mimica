@@ -42,10 +42,10 @@ export default function Home() {
             </span>
           </div>
           <div className="flex gap-2 w-full m-auto font-semibold">
-            <p className="text-xl bg-red-500 p-8 rounded-md w-1/2">
+            <p className="text-xl bg-red-500 p-4 rounded-md w-1/2">
               Vermelho: {redPoints}
             </p>
-            <p className="text-xl bg-blue-500 p-8 rounded-md w-1/2">
+            <p className="text-xl bg-blue-500 p-4 rounded-md w-1/2">
               Azul: {bluePoints}
             </p>
           </div>
