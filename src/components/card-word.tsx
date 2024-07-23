@@ -19,7 +19,7 @@ export default function CardWord({
   setBluePoints,
   team,
 }: CardWordProps) {
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [timeLeft, setTimeLeft] = useState(60);
   const playSound = () => {
     const audio = new Audio("./sound.wav");
     audio.play();
@@ -28,7 +28,7 @@ export default function CardWord({
     if (!visible) {
       return;
     }
-    setTimeLeft(5);
+    setTimeLeft(60);
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
