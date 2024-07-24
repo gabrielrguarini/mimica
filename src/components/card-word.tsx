@@ -1,6 +1,7 @@
 import { Teams } from "@/types/teams";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import useAudio from "@/hooks/useAudio";
 
 interface CardWordProps {
   visible: boolean;
@@ -22,10 +23,7 @@ export default function CardWord({
 }: CardWordProps) {
   const [timeLeft, setTimeLeft] = useState(60);
   const [blur, setBlur] = useState(false);
-  const playSound = () => {
-    const audio = new Audio("./sound6times.mp3");
-    audio.play();
-  };
+  const { playAudio, stopAudio } = useAudio("./sound6times.mp3");
   useEffect(() => {
     if (!visible) {
       return;
@@ -35,7 +33,7 @@ export default function CardWord({
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(timer);
-          playSound();
+          playAudio();
           return 0;
         }
         return prevTime - 1;
@@ -51,10 +49,12 @@ export default function CardWord({
     if (team === Teams.BLUE) {
       setBluePoints((prev) => prev + wordDificulty);
     }
+    stopAudio();
     setVisible(false);
     newWord();
   };
   const handleWrong = () => {
+    stopAudio();
     setVisible(false);
     newWord();
   };
