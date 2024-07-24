@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import SortNumber from "@/utils/sort-number";
 import { Teams } from "@/types/teams";
 import { useWakeLock } from "@/hooks/useWakeLook";
+import { motion } from "framer-motion";
 
 export default function Home() {
   useWakeLock();
@@ -21,6 +22,11 @@ export default function Home() {
   useEffect(() => {
     newWord();
   }, []);
+  const cardVariants = {
+    hidden: { x: "-100%", opacity: 0 },
+    visible: { x: "0%", opacity: 1 },
+    exit: { x: "100%", opacity: 0 },
+  };
   return (
     <main className="min-h-screen max-w-xl m-auto  flex-col items-center justify-between relative">
       {visible ? (
@@ -34,7 +40,14 @@ export default function Home() {
           team={team}
         />
       ) : (
-        <div className=" flex flex-col p-4 gap-8">
+        <motion.div
+          className=" flex flex-col p-4 gap-8"
+          variants={cardVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={{ duration: 0.5 }}
+        >
           <div className="flex justify-between items-center p-4">
             <h1 className="text-2xl font-bold">Mimica</h1>
             <span className="text-base text-gray-400 bg-gray-200 px-4 py-1 rounded-xl capitalize">
@@ -67,7 +80,7 @@ export default function Home() {
           >
             Revelar palavra
           </button>
-        </div>
+        </motion.div>
       )}
     </main>
   );
