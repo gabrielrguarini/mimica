@@ -5,7 +5,6 @@ export default function useAudio(url: string) {
 
   const playAudio = () => {
     if (audioRef.current) {
-      audioRef.current.pause();
       audioRef.current.currentTime = 0;
     } else {
       audioRef.current = new Audio(url);

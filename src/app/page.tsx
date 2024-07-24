@@ -46,14 +46,14 @@ export default function Home() {
         />
       ) : (
         <motion.div
-          className=" flex flex-col p-4 gap-8"
+          className=" flex flex-col px-4 py-2 gap-8"
           variants={cardVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
           transition={{ duration: 0.5 }}
         >
-          <div className="flex justify-between items-center p-4">
+          <div className="flex justify-between items-center py-4">
             <h1 className="text-2xl font-bold mr-4">Mimica</h1>
             <span className="ml-auto mr-4 text-base text-gray-400 bg-gray-200 px-4 py-1 rounded-xl capitalize">
               Categoria: {words[indexWord].categories}
