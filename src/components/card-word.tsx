@@ -1,5 +1,6 @@
 import { Teams } from "@/types/teams";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface CardWordProps {
   visible: boolean;
@@ -64,11 +65,23 @@ export default function CardWord({
       remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds
     }`;
   };
+  const cardVariants = {
+    hidden: { x: "-100%", opacity: 0 },
+    visible: { x: "0%", opacity: 1 },
+    exit: { x: "100%", opacity: 0 },
+  };
   if (!visible) {
     return null;
   }
   return (
-    <div className="m-auto min-w-xl h-full flex flex-col p-4 gap-8 z-10 bg-white">
+    <motion.div
+      className="m-auto min-w-xl h-full flex flex-col p-4 gap-8 z-10 bg-white"
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      transition={{ duration: 0.5 }}
+    >
       <div className="flex flex-col justify-between p-4 gap-8">
         <h3 className="text-2xl font-bold text-gray-400 bg-gray-200 px-6 py-2 rounded-xl text-center capitalize">
           Categoria: {word.categories}
@@ -126,6 +139,6 @@ export default function CardWord({
           Errou
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
