@@ -96,7 +96,7 @@ export default function CardWord({
           }}
           className="text-xs text-center"
         >
-          Click para esconder a palavra
+          Click para {blur ? "mostrar" : "esconder"} a palavra
         </p>
         <div className="flex justify-center rounded-md">
           <span className="text-8xl text-red-500 font-bold ">
