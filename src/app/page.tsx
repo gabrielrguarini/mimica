@@ -6,14 +6,18 @@ import SortNumber from "@/utils/sort-number";
 import { Teams } from "@/types/teams";
 import { useWakeLock } from "@/hooks/useWakeLook";
 import { motion } from "framer-motion";
+import { Settings } from "lucide-react";
+import SettingsWrapper from "@/components/settings";
 
 export default function Home() {
   useWakeLock();
   const [visible, setVisible] = useState(false);
+  const [settings, setSettings] = useState(false);
   const [indexWord, setIndexWord] = useState(0);
   const [redPoints, setRedPoints] = useState(0);
   const [bluePoints, setBluePoints] = useState(0);
   const [team, setTeam] = useState(Teams.BLUE);
+  const [time, setTime] = useState(60);
   const newWord = () => {
     const { value } = SortNumber(0, words.length);
     setTeam((prev) => (prev === Teams.BLUE ? Teams.RED : Teams.BLUE));
@@ -38,6 +42,7 @@ export default function Home() {
           setRedPoints={setRedPoints}
           setBluePoints={setBluePoints}
           team={team}
+          time={time}
         />
       ) : (
         <motion.div
@@ -49,7 +54,17 @@ export default function Home() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex justify-between items-center p-4">
-            <h1 className="text-2xl font-bold">Mimica</h1>
+            <h1 className="text-2xl font-bold mr-4">Mimica</h1>
+            <button className="mr-auto" onClick={() => setSettings(true)}>
+              <Settings />
+            </button>
+            {settings && (
+              <SettingsWrapper
+                timeLeft={time}
+                setTimeLeft={setTime}
+                setVisible={setSettings}
+              />
+            )}
             <span className="text-base text-gray-400 bg-gray-200 px-4 py-1 rounded-xl capitalize">
               Categoria: {words[indexWord].categories}
             </span>

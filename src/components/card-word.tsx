@@ -1,5 +1,5 @@
 import { Teams } from "@/types/teams";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useAudio from "@/hooks/useAudio";
 
@@ -11,6 +11,7 @@ interface CardWordProps {
   setRedPoints: React.Dispatch<React.SetStateAction<number>>;
   setBluePoints: React.Dispatch<React.SetStateAction<number>>;
   team: Teams;
+  time: number;
 }
 export default function CardWord({
   visible,
@@ -20,6 +21,7 @@ export default function CardWord({
   setRedPoints,
   setBluePoints,
   team,
+  time,
 }: CardWordProps) {
   const [timeLeft, setTimeLeft] = useState(60);
   const [blur, setBlur] = useState(false);
@@ -28,7 +30,7 @@ export default function CardWord({
     if (!visible) {
       return;
     }
-    setTimeLeft(60);
+    setTimeLeft(time);
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
