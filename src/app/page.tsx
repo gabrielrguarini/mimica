@@ -55,7 +55,10 @@ export default function Home() {
         >
           <div className="flex justify-between items-center p-4">
             <h1 className="text-2xl font-bold mr-4">Mimica</h1>
-            <button className="mr-auto" onClick={() => setSettings(true)}>
+            <span className="ml-auto mr-4 text-base text-gray-400 bg-gray-200 px-4 py-1 rounded-xl capitalize">
+              Categoria: {words[indexWord].categories}
+            </span>
+            <button className="" onClick={() => setSettings(!settings)}>
               <Settings />
             </button>
             {settings && (
@@ -65,9 +68,6 @@ export default function Home() {
                 setVisible={setSettings}
               />
             )}
-            <span className="text-base text-gray-400 bg-gray-200 px-4 py-1 rounded-xl capitalize">
-              Categoria: {words[indexWord].categories}
-            </span>
           </div>
           <div className="flex gap-2 w-full m-auto font-semibold">
             <p className="text-xl bg-red-500 p-4 rounded-md w-1/2">

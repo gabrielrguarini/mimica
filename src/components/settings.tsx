@@ -31,13 +31,13 @@ export default function SettingsWrapper({
             setTimeLeft(value);
             setVisible(false);
           }}
-          className="bg-slate-950 text-white px-4 py-2 rounded-md"
+          className="bg-slate-900 text-white px-4 py-2 rounded-md"
         >
           Salvar
         </button>
         <button
+          className="border-2 border-slate-900 px-4 py-2 rounded-md"
           onClick={(e) => {
-            setTimeLeft(value);
             setVisible(false);
           }}
         >
