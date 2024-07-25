@@ -1,4 +1,11 @@
 import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function SettingsWrapper({
   timeLeft,
@@ -10,20 +17,23 @@ export default function SettingsWrapper({
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [value, setValue] = useState(timeLeft);
+
   return (
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-min-full drop-shadow-2xl p-4 bg-white rounded-xl">
       <h1 className="text-2xl font-bold">Configurações</h1>
-      <div className="flex mx-8 my-2">
-        <input
-          className="w-full"
-          type="number"
-          name="time"
-          id="time"
-          placeholder="Tempo em segundos"
-          value={value}
-          onChange={(e) => setValue(Number(e.target.value))}
-        />
-        <p>Segundos</p>
+      <div className="flex  my-2">
+        <Select onValueChange={(e) => setValue(Number(e))}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue defaultValue={value} placeholder="Selecione o tempo" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="30">30 segundos</SelectItem>
+            <SelectItem value="60">1 minuto</SelectItem>
+            <SelectItem value="90">1:30 minutos</SelectItem>
+            <SelectItem value="120">2 minutos</SelectItem>
+            <SelectItem value="180">3 minutos</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex justify-end gap-4">
         <button
