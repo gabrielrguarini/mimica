@@ -11,6 +11,7 @@ interface CardWordProps {
   setRedPoints: React.Dispatch<React.SetStateAction<number>>;
   setBluePoints: React.Dispatch<React.SetStateAction<number>>;
   team: Teams;
+  setTeam: React.Dispatch<React.SetStateAction<Teams>>;
   time: number;
 }
 export default function CardWord({
@@ -21,6 +22,7 @@ export default function CardWord({
   setRedPoints,
   setBluePoints,
   team,
+  setTeam,
   time,
 }: CardWordProps) {
   const [timeLeft, setTimeLeft] = useState(60);
@@ -51,11 +53,13 @@ export default function CardWord({
     if (team === Teams.BLUE) {
       setBluePoints((prev) => prev + wordDificulty);
     }
+    setTeam((prev) => (prev === Teams.BLUE ? Teams.RED : Teams.BLUE));
     stopAudio();
     setVisible(false);
     newWord();
   };
   const handleWrong = () => {
+    setTeam((prev) => (prev === Teams.BLUE ? Teams.RED : Teams.BLUE));
     stopAudio();
     setVisible(false);
     newWord();

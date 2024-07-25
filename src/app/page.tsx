@@ -18,9 +18,17 @@ export default function Home() {
   const [bluePoints, setBluePoints] = useState(0);
   const [team, setTeam] = useState(Teams.BLUE);
   const [time, setTime] = useState(60);
+  const [usedWords, setUsedWords] = useState<UsedWord[]>([]);
   const newWord = () => {
     const { value } = SortNumber(0, words.length);
-    setTeam((prev) => (prev === Teams.BLUE ? Teams.RED : Teams.BLUE));
+    const reapeatWord = usedWords.some((index) => index.index === value);
+    if (reapeatWord) {
+      if (usedWords.length >= words.length - 5) {
+        setUsedWords([]);
+      }
+      newWord();
+      return;
+    }
     setIndexWord(value);
   };
   useEffect(() => {
@@ -43,6 +51,7 @@ export default function Home() {
           setBluePoints={setBluePoints}
           team={team}
           time={time}
+          setTeam={setTeam}
         />
       ) : (
         <motion.div
@@ -89,8 +98,29 @@ export default function Home() {
               </span>
             )}
           </div>
+          <p className="text-sm text-center">
+            A proxima palavra vale{" "}
+            <span className="text-lg font-bold">
+              {words[indexWord].difficulty}
+            </span>{" "}
+            pontos
+          </p>
+          {usedWords.length > 0 && (
+            <p className="text-sm text-center">
+              A ultima palavra foi:{" "}
+              <span className="text-base font-bold capitalize">
+                {usedWords[usedWords.length - 1]?.word}
+              </span>
+            </p>
+          )}
           <button
-            onClick={() => setVisible((prev) => !prev)}
+            onClick={() => {
+              setVisible((prev) => !prev);
+              setUsedWords((prev) => [
+                ...prev,
+                { word: words[indexWord].word, index: indexWord },
+              ]);
+            }}
             className="text-4xl border-2 border-slate-800 rounded-lg p-4"
           >
             Revelar palavra
