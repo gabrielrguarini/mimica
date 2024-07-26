@@ -1,7 +1,7 @@
 "use client";
 import CardWord from "@/components/card-word";
 import words from "../../public/db.json";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import SortNumber from "@/utils/sort-number";
 import { Teams } from "@/types/teams";
 import { useWakeLock } from "@/hooks/useWakeLook";
@@ -18,6 +18,7 @@ export default function Home() {
   const [bluePoints, setBluePoints] = useState(0);
   const [team, setTeam] = useState(Teams.BLUE);
   const [time, setTime] = useState(60);
+  const [isDark, setIsDark] = useState(true);
   const [usedWords, setUsedWords] = useState<UsedWord[]>([]);
   const newWord = () => {
     const { value } = SortNumber(0, words.length);
@@ -32,6 +33,17 @@ export default function Home() {
     setIndexWord(value);
   };
   useEffect(() => {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setIsDark(false);
+    }
     newWord();
   }, []);
   const cardVariants = {
@@ -40,7 +52,9 @@ export default function Home() {
     exit: { x: "100%", opacity: 0 },
   };
   return (
-    <main className="min-h-screen max-w-xl m-auto  flex-col items-center justify-between relative">
+    <main
+      className={`min-h-screen max-w-xl m-auto  flex-col items-center justify-between relative`}
+    >
       {visible ? (
         <CardWord
           visible={visible}
@@ -75,6 +89,8 @@ export default function Home() {
                 timeLeft={time}
                 setTimeLeft={setTime}
                 setVisible={setSettings}
+                isDark={isDark}
+                setIsDark={setIsDark}
               />
             )}
           </div>
@@ -86,7 +102,7 @@ export default function Home() {
               Azul: {bluePoints}
             </p>
           </div>
-          <div className="flex flex-col gap-2 m-auto bg-gray-300 w-full px-4 py-6 rounded-md">
+          <div className="flex flex-col gap-2 m-auto bg-gray-300 dark:bg-white dark:text-black w-full px-4 py-6 rounded-md">
             <h3 className="text-2xl font-bold px-4">É a vez do time:</h3>
             {team === Teams.RED ? (
               <span className="text-5xl text-gray text-red-500 px-4 py-1 rounded-xl font-bold">
