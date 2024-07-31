@@ -81,7 +81,7 @@ export default function CardWord({
   }
   return (
     <motion.div
-      className="m-auto min-w-xl h-full flex flex-col p-4 gap-8 z-10 bg-white dark:bg-slate-900"
+      className="m-auto min-w-xl h-full flex flex-col p-4 gap-8 z-10 "
       variants={cardVariants}
       initial="hidden"
       animate="visible"
