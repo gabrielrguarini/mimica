@@ -2,6 +2,7 @@ import { Teams } from "@/types/teams";
 import { use, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useAudio from "@/hooks/useAudio";
+import { formatTime } from "@/lib/utils";
 
 interface CardWordProps {
   visible: boolean;
@@ -44,7 +45,7 @@ export default function CardWord({
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [visible]);
+  }, [visible, playAudio, time]);
 
   const handleCorrect = (wordDificulty: number, team: Teams) => {
     if (team === Teams.RED) {
@@ -64,13 +65,7 @@ export default function CardWord({
     setVisible(false);
     newWord();
   };
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${
-      remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds
-    }`;
-  };
+
   const cardVariants = {
     hidden: { x: "100%", opacity: 0 },
     visible: { x: "0%", opacity: 1 },
