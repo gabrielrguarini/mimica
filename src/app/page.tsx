@@ -123,7 +123,7 @@ export default function Home() {
           </p>
           {usedWords.length > 0 && (
             <p className="text-sm text-center">
-              A ultima palavra foi:{" "}
+              Última palavra:{" "}
               <span className="text-base font-bold capitalize">
                 {usedWords[usedWords.length - 1]?.word}
               </span>
