@@ -11,9 +11,7 @@ export const useWakeLock = () => {
         );
         setWakeLock(wakeLockSentinel);
 
-        wakeLockSentinel.addEventListener("release", () => {
-          console.log("Wake Lock was released");
-        });
+        wakeLockSentinel.addEventListener("release", () => {});
       } catch (err: any) {
         console.error(
           `Failed to obtain wake lock: ${err.name}, ${err.message}`
@@ -30,7 +28,7 @@ export const useWakeLock = () => {
         });
       }
     };
-  }, []);
+  });
 
   return wakeLock;
 };
