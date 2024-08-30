@@ -2,7 +2,9 @@
 
 ### - 🕹️ Um jogo para se divertir com os amigos.
 ### - 🫱🏼‍🫲🏼 Monte dois times e comece a brincar.
-<img src="https://github.com/user-attachments/assets/d81dfc41-8a28-488a-bb4c-4aa2e6e6f048" width=300 >
+<div align="center">
+<img  src="https://github.com/user-attachments/assets/d81dfc41-8a28-488a-bb4c-4aa2e6e6f048" width=300 >
+</div>
 
 Jogo totalmente focado na jogabilidade e rapidez para poder ser uma brincadeira fluida e dinâmica
 
