@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+import type { Viewport, Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Mimica",
   description: "Divirta-se",
   generator: "Next.js",
@@ -18,18 +18,29 @@ export const metadata = {
     "palavras",
     "imitar",
   ],
-  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
+
   authors: [
-    { name: "Alldo Faiz Ramadhani" },
+    { name: "Gabriel Guarini" },
     {
-      name: "Alldo Faiz Ramadhani",
-      url: "https://www.linkedin.com/in/alldofaiz/",
+      name: "Gabriel Guarini",
+      url: "https://www.linkedin.com/in/gabriel-guarini",
     },
   ],
-  viewport:
-    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
 };
-
+export const themeColor = [
+  { media: "(prefers-color-scheme: dark)", color: "#fff" },
+];
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "cyan" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  minimumScale: 1,
+  initialScale: 1,
+  width: "device-width",
+  userScalable: false,
+  viewportFit: "cover",
+};
 export default function RootLayout({
   children,
 }: Readonly<{
