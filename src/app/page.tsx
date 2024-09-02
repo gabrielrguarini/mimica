@@ -107,7 +107,7 @@ export default function Home() {
             </p>
           </div>
           <div className="flex flex-col gap-2 m-auto bg-gray-300 dark:bg-white dark:text-black w-full px-4 py-6 rounded-md">
-            <h3 className="text-2xl font-bold px-4">É a vez do time:</h3>
+            <p className="text-2xl font-bold px-4">É a vez do time:</p>
             {team === Teams.RED ? (
               <span className="text-5xl text-gray text-red-500 px-4 py-1 rounded-xl font-bold">
                 Vermelho
