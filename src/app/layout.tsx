@@ -4,10 +4,30 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Mimica",
   description: "Divirta-se",
-  viewport: "width=device-width, initial-scale=1.0",
+  generator: "Next.js",
+  manifest: "/manifest.json",
+  keywords: [
+    "Mimica",
+    "jogo",
+    "mimica",
+    "imagem",
+    "ação",
+    "palavras",
+    "imitar",
+  ],
+  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
+  authors: [
+    { name: "Alldo Faiz Ramadhani" },
+    {
+      name: "Alldo Faiz Ramadhani",
+      url: "https://www.linkedin.com/in/alldofaiz/",
+    },
+  ],
+  viewport:
+    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
 };
 
 export default function RootLayout({
@@ -17,17 +37,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <meta
-        name="theme-color"
-        content="#ffffff"
-        media="(prefers-color-scheme: light)"
-      />
-      <meta
-        name="theme-color"
-        content="#000000"
-        media="(prefers-color-scheme: dark)"
-      />
-      <link rel="manifest" href="/manifest.json" />
       <body className={`${inter.className}`}>{children}</body>
     </html>
   );

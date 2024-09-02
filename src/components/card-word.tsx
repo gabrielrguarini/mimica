@@ -1,5 +1,5 @@
 import { Teams } from "@/types/teams";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useAudio from "@/hooks/useAudio";
 import { formatTime } from "@/lib/utils";
