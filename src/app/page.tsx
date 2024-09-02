@@ -1,7 +1,7 @@
 "use client";
 import CardWord from "@/components/card-word";
 import words from "../../public/db.json";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SortNumber from "@/utils/sort-number";
 import { Teams } from "@/types/teams";
 import { useWakeLock } from "@/hooks/useWakeLook";

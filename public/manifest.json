@@ -1,0 +1,16 @@
+{
+  "name": "Mimica",
+  "short_name": "Mimica",
+  "description": "Aplicativo de mimica offline",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e5e7eb",
+  "theme_color": "#e5e7eb",
+  "icons": [
+    {
+      "src": "/app/favicon.ico",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
+}
