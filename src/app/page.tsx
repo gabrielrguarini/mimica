@@ -81,7 +81,11 @@ export default function Home() {
             <span className="ml-auto mr-4 text-base text-gray-400 bg-gray-200 px-4 py-1 rounded-xl capitalize">
               Categoria: {words[indexWord].categories}
             </span>
-            <button className="" onClick={() => setSettings(!settings)}>
+            <button
+              aria-label="Configurações"
+              className=""
+              onClick={() => setSettings(!settings)}
+            >
               <Settings />
             </button>
             {settings && (
@@ -130,6 +134,7 @@ export default function Home() {
             </p>
           )}
           <button
+            aria-label="Revelar palavra"
             onClick={() => {
               setVisible((prev) => !prev);
               setUsedWords((prev) => [

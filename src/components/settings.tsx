@@ -60,6 +60,7 @@ export default function SettingsWrapper({
       </div>
       <div className="flex justify-end gap-4 my-2">
         <button
+          aria-label="Salvar"
           onClick={(e) => {
             setTimeLeft(value);
             setVisible(false);
@@ -69,6 +70,7 @@ export default function SettingsWrapper({
           Salvar
         </button>
         <button
+          aria-label="Cancelar"
           className="border-2 border-slate-900 px-4 py-2 rounded-md"
           onClick={(e) => {
             setVisible(false);

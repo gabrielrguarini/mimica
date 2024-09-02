@@ -128,12 +128,14 @@ export default function CardWord({
           </p>
         </div>
         <button
+          aria-label="Acertou"
           onClick={() => handleCorrect(word.difficulty, team)}
           className="text-4xl border-2 bg-green-500 text-green-900 rounded-lg p-4"
         >
           Acertou
         </button>
         <button
+          aria-label="Errou"
           onClick={handleWrong}
           className="text-4xl border-2 bg-red-500 text-red-900 rounded-lg p-4"
         >
