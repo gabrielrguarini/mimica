@@ -21,12 +21,8 @@ export default function Home() {
   const [isDark, setIsDark] = useState(true);
   const [usedWords, setUsedWords] = useState<UsedWord[]>([]);
   const newWord = () => {
-    if (localStorage.getItem("usedWords")) {
-      const usedWords = JSON.parse(localStorage.getItem("usedWords") || "[]");
-      setUsedWords(usedWords);
-    }
     const { value } = SortNumber(0, words.length);
-
+    console.log(words[value].word);
     const reapeatWord = usedWords.some((index) => index.index === value);
     if (!reapeatWord) {
       localStorage.setItem(
@@ -47,6 +43,10 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("usedWords")) {
+      const usedWords = JSON.parse(localStorage.getItem("usedWords") || "[]");
+      setUsedWords(usedWords);
+    }
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
