@@ -1,7 +1,7 @@
 "use client";
 import CardWord from "@/components/card-word";
 import words from "../../public/db.json";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import SortNumber from "@/utils/sort-number";
 import { Teams } from "@/types/teams";
 import { useWakeLock } from "@/hooks/useWakeLook";
@@ -21,17 +21,31 @@ export default function Home() {
   const [isDark, setIsDark] = useState(true);
   const [usedWords, setUsedWords] = useState<UsedWord[]>([]);
   const newWord = () => {
+    if (localStorage.getItem("usedWords")) {
+      const usedWords = JSON.parse(localStorage.getItem("usedWords") || "[]");
+      setUsedWords(usedWords);
+    }
     const { value } = SortNumber(0, words.length);
+
     const reapeatWord = usedWords.some((index) => index.index === value);
-    if (reapeatWord) {
-      if (usedWords.length >= words.length - 5) {
-        setUsedWords([]);
-      }
-      newWord();
+    if (!reapeatWord) {
+      localStorage.setItem(
+        "usedWords",
+        JSON.stringify([
+          ...usedWords,
+          { word: words[value].word, index: value },
+        ])
+      );
+      setIndexWord(value);
       return;
     }
-    setIndexWord(value);
+
+    if (usedWords.length >= words.length - 5) {
+      setUsedWords([]);
+    }
+    newWord();
   };
+
   useEffect(() => {
     if (
       localStorage.theme === "dark" ||
