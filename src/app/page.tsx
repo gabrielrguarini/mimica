@@ -32,6 +32,10 @@ export default function Home() {
           { word: words[value].word, index: value },
         ])
       );
+      setUsedWords((prev) => [
+        ...prev,
+        { word: words[indexWord].word, index: indexWord },
+      ]);
       setIndexWord(value);
       return;
     }
@@ -58,7 +62,6 @@ export default function Home() {
       document.documentElement.classList.remove("dark");
       setIsDark(false);
     }
-    newWord();
   }, []);
   const cardVariants = {
     hidden: { x: "-100%", opacity: 0 },
@@ -150,11 +153,8 @@ export default function Home() {
           <button
             aria-label="Revelar palavra"
             onClick={() => {
+              newWord();
               setVisible((prev) => !prev);
-              setUsedWords((prev) => [
-                ...prev,
-                { word: words[indexWord].word, index: indexWord },
-              ]);
             }}
             className="text-4xl border-2 border-slate-800 rounded-lg p-4"
           >
