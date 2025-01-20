@@ -1,16 +1,20 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useEffect } from "react";
 
 export default function useAudio(url: string) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(url);
+    }
+  }, [url]);
+
   const playAudio = useCallback(() => {
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
-    } else {
-      audioRef.current = new Audio(url);
+      audioRef.current.play();
     }
-    audioRef.current.play();
-  }, [url]);
+  }, []);
 
   const stopAudio = useCallback(() => {
     if (audioRef.current) {

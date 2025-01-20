@@ -49,6 +49,8 @@ export default function Home() {
     if (localStorage.getItem("usedWords")) {
       const usedWords = JSON.parse(localStorage.getItem("usedWords") || "[]");
       setUsedWords(usedWords);
+    } else {
+      newWord();
     }
     if (
       localStorage.theme === "dark" ||
@@ -152,7 +154,6 @@ export default function Home() {
           <button
             aria-label="Revelar palavra"
             onClick={() => {
-              newWord();
               setVisible((prev) => !prev);
             }}
             className="text-4xl border-2 border-slate-800 rounded-lg p-4"

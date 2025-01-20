@@ -19,6 +19,7 @@ export default function CardWord({
   visible,
   setVisible,
   word,
+  newWord,
   setRedPoints,
   setBluePoints,
   team,
@@ -55,11 +56,13 @@ export default function CardWord({
     }
     setTeam((prev) => (prev === Teams.BLUE ? Teams.RED : Teams.BLUE));
     stopAudio();
+    newWord();
     setVisible(false);
   };
   const handleWrong = () => {
     setTeam((prev) => (prev === Teams.BLUE ? Teams.RED : Teams.BLUE));
     stopAudio();
+    newWord();
     setVisible(false);
   };
 
