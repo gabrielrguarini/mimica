@@ -71,7 +71,7 @@ export default function Home() {
   };
   return (
     <main
-      className={`min-h-screen max-w-xl m-auto  flex-col items-center justify-between relative`}
+      className={`h-dvh max-w-xl m-auto  flex-col items-center justify-between relative`}
     >
       {visible ? (
         <CardWord
