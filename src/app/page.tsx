@@ -8,50 +8,59 @@ import { useWakeLock } from "@/hooks/useWakeLook";
 import { motion } from "framer-motion";
 import { Settings } from "lucide-react";
 import SettingsWrapper from "@/components/settings";
+import { StartGame } from "@/components/start-game";
+import { useGameStore } from "@/store/useGameStore";
 
 export default function Home() {
   useWakeLock();
+
   const [visible, setVisible] = useState(false);
   const [settings, setSettings] = useState(false);
-  const [indexWord, setIndexWord] = useState(0);
-  const [redPoints, setRedPoints] = useState(0);
-  const [bluePoints, setBluePoints] = useState(0);
-  const [team, setTeam] = useState(Teams.BLUE);
   const [time, setTime] = useState(60);
   const [isDark, setIsDark] = useState(true);
-  const [usedWords, setUsedWords] = useState<UsedWord[]>([]);
+  const [showStartScreen, setShowStartScreen] = useState(false);
+
+  const {
+    redPoints,
+    bluePoints,
+    team,
+    indexWord,
+    usedWords,
+    setIndexWord,
+    addUsedWord,
+    setUsedWords,
+    resetGame,
+    previousWord,
+  } = useGameStore();
+
   const newWord = () => {
-    const { value } = SortNumber(0, words.length);
-    const reapeatWord = usedWords.some((index) => index.index === value);
-    if (!reapeatWord) {
-      localStorage.setItem(
-        "usedWords",
-        JSON.stringify([
-          ...usedWords,
-          { word: words[value].word, index: value },
-        ])
-      );
-      setUsedWords((prev) => [
-        ...prev,
-        { word: words[indexWord].word, index: indexWord },
-      ]);
-      setIndexWord(value);
+    const totalWords = words.length;
+    const usedIndexes = usedWords.map((w) => w.index);
+
+    const availableIndexes = words
+      .map((_, index) => index)
+      .filter((index) => !usedIndexes.includes(index));
+
+    if (availableIndexes.length <= 5) {
+      setUsedWords([]);
+      newWord();
       return;
     }
 
-    if (usedWords.length >= words.length - 5) {
-      setUsedWords([]);
-    }
-    newWord();
+    const { value } = SortNumber(0, availableIndexes.length);
+    const selectedIndex = availableIndexes[value];
+    addUsedWord({ word: words[selectedIndex].word, index: selectedIndex });
+    setIndexWord(selectedIndex);
   };
 
   useEffect(() => {
-    if (localStorage.getItem("usedWords")) {
-      const usedWords = JSON.parse(localStorage.getItem("usedWords") || "[]");
-      setUsedWords(usedWords);
+    const hasGame = localStorage.getItem("mimica-game-storage");
+    if (hasGame) {
+      setShowStartScreen(true);
     } else {
       newWord();
     }
+
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
@@ -64,30 +73,40 @@ export default function Home() {
       setIsDark(false);
     }
   }, []);
+
+  if (showStartScreen) {
+    return (
+      <StartGame
+        hasSavedGame={true}
+        onContinueGame={() => setShowStartScreen(false)}
+        onStartNewGame={() => {
+          resetGame();
+          newWord();
+          setShowStartScreen(false);
+        }}
+      />
+    );
+  }
+
   const cardVariants = {
     hidden: { x: "-100%", opacity: 0 },
     visible: { x: "0%", opacity: 1 },
     exit: { x: "100%", opacity: 0 },
   };
+
   return (
-    <main
-      className={`h-dvh max-w-xl m-auto  flex-col items-center justify-between relative`}
-    >
+    <main className="h-dvh max-w-xl m-auto flex-col items-center justify-between relative">
       {visible ? (
         <CardWord
           visible={visible}
           setVisible={setVisible}
           word={words[indexWord]}
           newWord={newWord}
-          setRedPoints={setRedPoints}
-          setBluePoints={setBluePoints}
-          team={team}
           time={time}
-          setTeam={setTeam}
         />
       ) : (
         <motion.div
-          className=" flex flex-col px-4 py-2 gap-8"
+          className="flex flex-col px-4 py-2 gap-8"
           variants={cardVariants}
           initial="hidden"
           animate="visible"
@@ -95,13 +114,12 @@ export default function Home() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex justify-between items-center py-4">
-            <h1 className="text-2xl font-bold mr-4">Mimica</h1>
+            <h1 className="text-2xl font-bold mr-4">Mímica</h1>
             <span className="ml-auto mr-4 text-base text-gray-400 bg-gray-200 px-4 py-1 rounded-xl capitalize">
               Categoria: {words[indexWord].categories}
             </span>
             <button
               aria-label="Configurações"
-              className=""
               onClick={() => setSettings(!settings)}
             >
               <Settings />
@@ -137,25 +155,23 @@ export default function Home() {
             )}
           </div>
           <p className="text-sm text-center">
-            A proxima palavra vale{" "}
+            A próxima palavra vale{" "}
             <span className="text-lg font-bold">
               {words[indexWord].difficulty}
             </span>{" "}
-            pontos
+            ponto(s)
           </p>
-          {usedWords.length > 0 && (
+          {previousWord && (
             <p className="text-sm text-center">
               Última palavra:{" "}
               <span className="text-base font-bold capitalize">
-                {usedWords[usedWords.length - 1]?.word}
+                {previousWord}
               </span>
             </p>
           )}
           <button
             aria-label="Revelar palavra"
-            onClick={() => {
-              setVisible((prev) => !prev);
-            }}
+            onClick={() => setVisible(true)}
             className="text-4xl border-2 border-slate-800 rounded-lg p-4"
           >
             Revelar palavra
