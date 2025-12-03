@@ -49,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <Analytics />
-      <body className={`${inter.className}`}>{children}</body>
+      <body className={`select-none ${inter.className}`}>{children}</body>
     </html>
   );
 }
